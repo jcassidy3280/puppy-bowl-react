@@ -1,21 +1,12 @@
-// import { fetchAllPlayers } from "../fetchAPI";
+import { useNavigate } from "react-router-dom"
 
-const SinglePlayer = () => {
-
-
+const SelectSinglePlayer = (props) => {
+    const playerNav = useNavigate()
     return (
-        <div id="single-player">
-            <h2>Puppy Player: </h2>
+        <div className="player-name">
+            <h4 onClick = {()=> {playerNav(`/selectedPlayer/${props.element.id}`)}} >{props.element.name}</h4>
         </div>
-        //         {allPosts.length ? allPosts.map ( (singlePost, i) => {
-        //   return (
-        //   <div key={i}>
-        //     <h2>Name: {singlePost.title}</h2>
-        //     <p>Post: {singlePost.body}</p>
-        //   </div>
-        //   )
-        //   }) : <p>Loading ...</p> }
     )
 }
 
-export default SinglePlayer;
+export default SelectSinglePlayer

@@ -3,13 +3,19 @@ import { useState, useEffect } from 'react'
 import { Routes, Route} from 'react-router-dom'
 import NavBar from './components/NavBar.jsx'
 import Home from './components/Home.jsx'
-import SinglePlayer from './components/SinglePlayer.jsx'
+// import PlayerRoster from './components/PlayerRoster.jsx'
+import SinglePlayerCard from './components/SinglePlayerCard.jsx'
+import SearchBar from './components/SearchBar.jsx'
+// import YourPuppyBowlTeam from './components/MyTeam.jsx'
 import './App.css'
 
 
 function App() {
+    // const [eligiblePlayers, setEligiblePlayers] = useState([]);
+    // const [team, setTeam] = useState([]);
 
-  const [ allPlayers, setAllPlayers] = useState([])
+  const [allPlayers, setAllPlayers] = useState([])
+
   const getAllPlayers = async () => {
     try {
       const playerArr = await fetchAllPlayers()
@@ -17,29 +23,35 @@ function App() {
     } catch (error) {
       console.log(error)
     }
-
   }
   useEffect ( () => {{getAllPlayers()}
   }, [])
-    console.log(allPlayers)
+
+  // useEffect ( ()=> {
+  //   //filter for bench
+  //   //set new array to state
+  //   setEligiblePlayers(allPlayers)
+  //   //pass
+
+  // }, [allPlayers])
+  // console.log(eligiblePlayers)
+
   return (
     <>
-      <div className="title">
-        <h1>Puppy Bowl</h1>
-      </div>
-      <div id="nav-bar">
+      <nav>
         <NavBar />
-      </div>
+      </nav>
+   
       <div id="main-section">
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/blue" element={<AllPlayers />} />
-            <Route path="/blue" element={<SinglePlayer />} /> */}
+            <Route path="/all" element={<SearchBar />} />
+            <Route path="/selectedPlayer/:id" element={<SinglePlayerCard />} />
+            {/* <Route path="/myTeam" element={<YourPuppyBowlTeam />} /> */}
+
           </Routes>
           </div>
-      <div id="single-player">
-        < SinglePlayer />
-      </div>
+     
     </>
   )
 }

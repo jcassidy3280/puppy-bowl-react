@@ -5,7 +5,6 @@ export const fetchAllPlayers = async () => {
   try {
     const response = await fetch (`${API_URL}${API_COHORT}/players`)
     const data = await response.json()
-    console.log(data.data.players)
     return(data.data.players)
     
   } catch (error) {
